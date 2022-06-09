@@ -1,0 +1,241 @@
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!-- Bootstrap 3.3.7 -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/Ionicons/css/ionicons.min.css">
+<!-- daterange picker -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/iCheck/all.css">
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+<!-- Bootstrap time Picker -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/select2/dist/css/select2.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.min.css">
+<script type="text/javascript">
+  	function cekform()
+  	{
+    	if (!$("#id_tahun").val()) 
+    	{
+      		alert('Tahun Ajaran Tidak boleh kosong');
+      		$("#id_tahun").focus()
+      		return false;
+    	}
+  	}
+</script>
+<div class="box box-primary">
+  	<div class="box-header with-border">
+    	<h3 class="box-title">Update Data</h3>
+  	</div>
+  	<!-- /.box-header -->
+  	<!-- form start -->
+  	<div class="modal-dialog">
+    <!-- /.row -->
+    <div class="row">
+  	<div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Update Data
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <?php
+              foreach ($jadwal as $j){
+              ?>
+        		  <form role="form" action="<?php echo base_url(); ?>jadwal/update" method="POST" onsubmit="return cekform();">
+                <input type="hidden" name="id_jadwal" value="<?= $j->id_jadwal?>">
+                <div class="box-body">
+          					<div class="form-group">
+          				  	<label>Tahun Ajaran</label>
+          				    <select class="form-control select2" name="id_tahun" id="id_tahun" data-placeholder="Select Tahun Ajaran">
+                        <?php foreach ($thn_ajaran as $t) { ?>
+                        <option value="<?php echo $t->id_tahun; ?>" <?php if ($j->id_tahun == $t->id_tahun) echo "selected"?>><?php echo $t->nama_tahun; ?></option>
+                        <?php } ?>
+                      </select>
+          				  </div>
+                    <div class="form-group">
+                      <label>Nama Makul</label>
+                      <select class="form-control select2" name="id_makul" id="id_makul" data-placeholder="Select Makul">
+                        <?php foreach ($makul as $m) { ?>
+                        <option value="<?php echo $m->id_makul; ?>" <?php if ($j->id_makul == $m->id_makul) echo "selected"?>><?php echo $m->nama_makul; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Dosen Pengampu</label><br>
+                      <select class="form-control select2" name="nip" id="nip" data-placeholder="Select Dosen Pengampu">
+                        <?php foreach ($dosen as $d) { ?>
+                        <option value="<?php echo $d->nip; ?>" <?php if ($j->nip == $d->nip) echo "selected"?>><?php echo $d->nama_dosen; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Semester</label>
+                      <select class="form-control" name="semester" id="semester">
+                        <option value="0" <?php if ($j->semester == 0) echo "selected"?>>Ganjil</option>
+                        <option value="1" <?php if ($j->semester == 1) echo "selected"?>>Genap</option>
+                      </select>                        
+                    </div>
+          				  <div class="form-group">
+                      <label>Jenis</label>
+                      <select class="form-control" name="jenis" id="jenis">
+                        <option value="Praktikum" <?php if ($j->jenis == "Praktikum") echo "selected"?>>Praktikum</option>
+                        <option value="Teori" <?php if ($j->jenis == "Teori") echo "selected"?>>Teori</option>
+                      </select>                        
+                    </div>
+          				  <div class="form-group">
+                      <label>Hari</label>
+                      <select class="form-control" name="hari" id="hari">
+                        <option value="Senin" <?php if ($j->hari == "Senin") echo "selected"?>>Senin</option>
+                        <option value="Selasa" <?php if ($j->hari == "Selasa") echo "selected"?>>Selasa</option>
+                        <option value="Rabu" <?php if ($j->hari == "Rabu") echo "selected"?>>Rabu</option>
+                        <option value="Kamis" <?php if ($j->hari == "Kamis") echo "selected"?>>Kamis</option>
+                        <option value="Jumat" <?php if ($j->hari == "Jumat") echo "selected"?>>Jumat</option>
+                        <option value="Sabtu" <?php if ($j->hari == "Sabtu") echo "selected"?>>Sabtu</option>
+                        <option value="Minggu" <?php if ($j->hari == "Minggu") echo "selected"?>>Minggu</option>
+                      </select>                        
+                    </div>
+                    <div class="bootstrap-timepicker">
+                      <div class="form-group">
+                        <label>Jam</label>
+                        <div class="input-group">
+                          <input type="text" name="jam" value="<?= $j->jam?>" class="form-control timepicker">
+                          <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Ruang Kelas</label><br>
+                      <select class="form-control select2" name="id_ruang" id="id_ruang" data-placeholder="Select Ruangan">
+                        <?php foreach ($ruang as $r) { ?>
+                        <option value="<?php echo $r->id_ruang; ?>" <?php if ($j->id_ruang == $r->id_ruang) echo "selected"?>><?php echo $r->nama_ruang; ?></option>
+                              <?php } ?>
+                      </select>
+                    </div>
+                    <?php } ?>
+        				  </div>
+        				    <!-- /.box-body -->
+        				  <div class="box-footer">
+        				   	<button type="submit" class="btn btn-primary">Simpan</button>
+        				  </div>
+        			  </form>
+      				</div>
+            </div>
+                <!-- /.row (nested) -->
+          </div>
+            <!-- /.panel-body -->
+        </div>
+       	<!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- jQuery 3 -->
+<script src="<?php echo base_url(); ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Select2 -->
+<script src="<?php echo base_url(); ?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- date-range-picker -->
+<script src="<?php echo base_url(); ?>assets/bower_components/moment/min/moment.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url(); ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="<?php echo base_url(); ?>assets/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<!-- bootstrap time picker -->
+<script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<!-- SlimScroll -->
+<script src="<?php echo base_url(); ?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="<?php echo base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
+<!-- FastClick -->
+<script src="../..<?php echo base_url(); ?>assets/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url(); ?>assets/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
+<script type="text/javascript">
+	$(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    //Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
+    })
+  })
+</script>
