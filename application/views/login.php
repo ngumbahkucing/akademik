@@ -215,7 +215,7 @@
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Username" required />
                             </div>
                             <div class="form-group" style="padding-bottom: 20px;" align="center">
-                                <input type="Password" name="password" id="password" class="form-control" placeholder="Password" required />
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required />
                             </div>
                             <div class="form-group">
                                 <label>Level</label><br>
