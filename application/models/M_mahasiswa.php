@@ -5,7 +5,7 @@ class M_mahasiswa extends CI_Model {
 
 	function tampil_data()
 	{
-		$sql 	= "SELECT * FROM mahasiswa";
+		$sql 	= "SELECT * FROM mahasiswa order by id_tahun desc, nim desc";
 
 		$data 	= $this->db->query($sql);
 
@@ -25,7 +25,7 @@ class M_mahasiswa extends CI_Model {
 	function tampil_data_dosen($nim)
 	{
 		$sql 	= "SELECT * FROM mahasiswa
-				   LEFT JOIN dosen ON dosen.nip = mahasiswa.nip
+				   LEFT JOIN dosen ON dosen.nama_dosen = mahasiswa.nama_dosen
 				   WHERE mahasiswa.nim = '$nim'";
 
 		$data 	= $this->db->query($sql);

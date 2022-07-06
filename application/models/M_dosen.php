@@ -5,7 +5,7 @@ class M_dosen extends CI_Model {
 
 	function tampil_data()
 	{
-		$sql = "SELECT * FROM dosen";
+		$sql = "SELECT * FROM dosen order by nama_dosen asc ";
 
 		$data = $this->db->query($sql);
 

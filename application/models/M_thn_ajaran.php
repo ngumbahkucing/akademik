@@ -5,7 +5,7 @@ class M_thn_ajaran extends CI_Model {
 
 	function tampil_data()
 	{
-		$sql = "SELECT * FROM thn_ajaran";
+		$sql = "SELECT * FROM thn_ajaran order by id_tahun desc";
 
 		$data = $this->db->query($sql);
 
